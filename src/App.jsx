@@ -96,7 +96,7 @@ function App() {
         <br />
         <div>
           {comparisonPay ? <p>To earn the equivalent today of what you earned in {comparisonYear}, your pay would have to be {formatCurrency(comparisonPayInCurrentTerms)}</p> : null}
-          {comparisonPay && currentPay && isPayRise ? <p>Since {comparisonYear} you have had a real terms pay rise of {payChange}% since {comparisonYear}</p> : null}
+          {comparisonPay && currentPay && isPayRise ? <p>Since {comparisonYear} you have had a real terms pay rise of {payChange}%</p> : null}
           {comparisonPay && currentPay && !isPayRise ? <p>Since {comparisonYear} you have had a real terms pay cut of {payChange}%</p> : null}
         </div>
       </form>
