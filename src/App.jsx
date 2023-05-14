@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import data from './data';
 import Graph from './Graph';
 
@@ -7,13 +7,10 @@ const formatCurrency = amount => `£${amount.toLocaleString(undefined, { maximum
 
 const numberIsDefined = input => input || input === 0;
 
-const periods = ["yearly", "monthly", "weekly", "daily", "hourly"];
-
 function App() {
   const [comparisonPay, setComparisonPay] = useState("");
   const [currentPay, setCurrentPay] = useState("");
   const [comparisonYear, setComparisonYear] = useState(data[0].year);
-  const [index, setIndex] = useState(0);
 
   const [provisionalComparisonPay, setProvisionalComparisonPay] = useState("");
   const [provisionalCurrentPay, setProvisionalCurrentPay] = useState("");
@@ -34,14 +31,6 @@ function App() {
 
   const realTermsPayChange = Math.round(Math.abs(100 * (currentPay - comparisonPayInCurrentTerms) / comparisonPayInCurrentTerms));
   const nominalTermsPayChange = Math.round(Math.abs(100 * (currentPay - comparisonPay) / comparisonPay));
-
-  useEffect(() => {
-    const intervalId = setInterval(
-      () => setIndex((index) => index + 1),
-      3000
-    );
-    return () => clearTimeout(intervalId);
-  }, []);
 
   const onSubmit = event => {
     setComparisonPay(provisionalComparisonPay);
@@ -65,7 +54,7 @@ function App() {
                       setProvisionalComparisonPay(e.target.valueAsNumber);
                       setShowResults(false);
                     }} />
-                  <label htmlFor="comparisonPayInput">What was your {periods[index % periods.length]} pay in {provisionalComparisonYear}?*</label>
+                  <label htmlFor="comparisonPayInput">What was your pay in {provisionalComparisonYear}?*</label>
                 </div>
               </div>
 
@@ -99,7 +88,7 @@ function App() {
                       setProvisionalCurrentPay(e.target.valueAsNumber);
                       setShowResults(false);
                     }} />
-                  <label htmlFor="currentPayInput">What is your {periods[index % periods.length]} pay now?</label>
+                  <label htmlFor="currentPayInput">What is your pay now?</label>
                 </div>
               </div>
 
