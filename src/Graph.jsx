@@ -50,22 +50,22 @@ function Graph(props) {
             <text
                 x={axisOffset + barPadding + barWidth / 2}
                 y={height - axisOffset + horizontalTextPadding}
-                dominant-baseline="hanging"
-                text-anchor="middle">
+                dominantBaseline="hanging"
+                textAnchor="middle">
                 {props.comparisonYear}
             </text>
             <text
                 x={axisOffset + 2 * barPadding + 3 * barWidth / 2}
                 y={height - axisOffset + horizontalTextPadding}
-                dominant-baseline="hanging"
-                text-anchor="middle">
+                dominantBaseline="hanging"
+                textAnchor="middle">
                 {props.currentYear}
             </text>
             <text
                 x={axisOffset - verticalTextPadding}
                 y={height - axisOffset - (axisLength)/2}
-                dominant-baseline="middle"
-                text-anchor="middle"
+                dominantBaseline="middle"
+                textAnchor="middle"
                 transform={`rotate(270 ${axisOffset - verticalTextPadding},${height - axisOffset - (axisLength)/2})`}
                 >
                 Real terms pay

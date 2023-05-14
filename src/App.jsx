@@ -131,7 +131,6 @@ function App() {
                   {isPayRise ? <p>This is less than the {nominalTermsPayChange}% nominal pay rise the numbers suggest</p> : null}
                   {!isPayRise ? <p>Since {comparisonYear} you have had a real terms <span className="text-danger">pay cut</span> of {realTermsPayChange}%</p> : null}
                   {<p>Your pay in {comparisonYear} is equivalent to {formatCurrency(comparisonPayInCurrentTerms)} today</p>}
-                  {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
                 </div>
               </div>
             </div>
