@@ -69,7 +69,7 @@ function App() {
                 e.preventDefault();
                 setShowCurrentYearSelector(!showCurrentYearSelector);
               }}>
-                <summary><a href="">*Weren't working in {provisionalComparisonYear}?</a></summary>
+                <summary className="link-primary">*Weren't working in {provisionalComparisonYear}?</summary>
                 <p onClick={e => e.stopPropagation()}>Select a year when you were working:</p>
                 <select className="form-select" id="comparisonYearSelect" value={provisionalComparisonYear} onClick={e => e.stopPropagation()}
                   onChange={e => {
