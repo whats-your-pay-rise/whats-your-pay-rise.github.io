@@ -1,32 +1,25 @@
 import './App.css';
-import { useState } from 'react';
-
-// Source: https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt
-const data = [
-  { year: 2010, index: 89.4 },
-  { year: 2011, index: 93.4 },
-  { year: 2012, index: 96.1 },
-  { year: 2013, index: 98.5 },
-  { year: 2014, index: 100.0 },
-  { year: 2015, index: 100.0 },
-  { year: 2016, index: 100.7 },
-  { year: 2017, index: 103.4 },
-  { year: 2018, index: 105.9 },
-  { year: 2019, index: 107.8 },
-  { year: 2020, index: 108.7 },
-  { year: 2021, index: 111.6 },
-  { year: 2022, index: 121.7 },
-  { year: 2023, index: 128.9 }
-];
+import { useEffect, useState } from 'react';
+import data from './data';
 
 const formatCurrency = amount => `£${amount.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
+const numberIsDefined = input => input || input === 0;
+
+const periods = ["yearly", "monthly", "weekly", "daily", "hourly"];
+
 function App() {
-  const [comparisonPay, setComparisonPay] = useState(0);
-  const [currentPay, setCurrentPay] = useState(0);
+  const [comparisonPay, setComparisonPay] = useState("");
+  const [currentPay, setCurrentPay] = useState("");
+  const [comparisonYear, setComparisonYear] = useState(data[0].year);
+  const [index, setIndex] = useState(0);
+
+  const [provisionalComparisonPay, setProvisionalComparisonPay] = useState("");
+  const [provisionalCurrentPay, setProvisionalCurrentPay] = useState("");
+  const [provisionalComparisonYear, setProvisionalComparisonYear] = useState(comparisonYear);
 
   const [showCurrentYearSelector, setShowCurrentYearSelector] = useState(false);
-  const [comparisonYear, setComparisonYear] = useState(data[0].year);
+
   const currentYear = data[data.length - 1].year;
 
   const comparisonYearIndex = data.find(entry => entry.year === comparisonYear).index;
@@ -36,23 +29,36 @@ function App() {
 
   const isPayRise = currentPay > comparisonPayInCurrentTerms;
 
-  const payChange = Math.round(Math.abs(100 * (currentPay - comparisonPayInCurrentTerms) / comparisonPayInCurrentTerms));
+  const realTermsPayChange = Math.round(Math.abs(100 * (currentPay - comparisonPayInCurrentTerms) / comparisonPayInCurrentTerms));
+  const nominalTermsPayChange = Math.round(Math.abs(100 * (currentPay - comparisonPay) / comparisonPay));
+
+  useEffect(() => {
+    const intervalId = setInterval(
+      () => setIndex((index) => index + 1),
+      3000
+    );
+    return () => clearTimeout(intervalId);
+  }, []);
+
+  const onSubmit = event => {
+    setComparisonPay(provisionalComparisonPay);
+    setCurrentPay(provisionalCurrentPay);
+    setComparisonYear(provisionalComparisonYear);
+    event.preventDefault();
+  };
 
   return (
     <div className="App">
-
-
-      <form>
+      <form onSubmit={onSubmit}>
         <fieldset>
           <div className='row'>
             <div className='col-md'>
-
               <div className="input-group mb-3 px-3">
                 <span className="input-group-text">£</span>
                 <div className="form-floating">
                   <input type="number" className="form-control" id="comparisonPayInput" aria-describedby="comparisonPay" placeholder='placeholder'
-                    onChange={e => setComparisonPay(e.target.valueAsNumber)} />
-                  <label for="comparisonPayInput">Your pay in {comparisonYear}</label>
+                    onChange={e => setProvisionalComparisonPay(e.target.valueAsNumber)} />
+                  <label htmlFor="comparisonPayInput">What was your {periods[index % periods.length]} pay in {provisionalComparisonYear}?*</label>
                 </div>
               </div>
 
@@ -63,11 +69,11 @@ function App() {
                 e.preventDefault();
                 setShowCurrentYearSelector(!showCurrentYearSelector);
               }}>
-                <summary>Weren't working in {comparisonYear}?</summary>
+                <summary><a href="">*Weren't working in {provisionalComparisonYear}?</a></summary>
                 <p onClick={e => e.stopPropagation()}>Select a year when you were working:</p>
-                <select className="form-select" value={comparisonYear} onClick={e => e.stopPropagation()}
+                <select className="form-select" id="comparisonYearSelect" value={provisionalComparisonYear} onClick={e => e.stopPropagation()}
                   onChange={e => {
-                    setComparisonYear(parseInt(e.target.value, 10));
+                    setProvisionalComparisonYear(parseInt(e.target.value, 10));
                     setShowCurrentYearSelector(false);
                   }}>
                   {data.slice(0, -1).map(entry => <option key={entry.year}>{entry.year}</option>)}
@@ -82,8 +88,8 @@ function App() {
                 <span className="input-group-text">£</span>
                 <div className="form-floating">
                   <input type="number" className="form-control" id="currentPayInput" aria-describedby="currentPay" placeholder='placeholder'
-                    onChange={e => setCurrentPay(e.target.valueAsNumber)} />
-                  <label for="currentPayInput">Your pay now</label>
+                    onChange={e => setProvisionalCurrentPay(e.target.valueAsNumber)} />
+                  <label htmlFor="currentPayInput">What is your {periods[index % periods.length]} pay now?</label>
                 </div>
               </div>
 
@@ -92,12 +98,13 @@ function App() {
               </div> */}
             </div>
           </div>
+          <button type="submit" className="btn btn-primary btn-lg" disabled={!numberIsDefined(provisionalCurrentPay) || !numberIsDefined(provisionalComparisonPay)}>Calculate</button>
         </fieldset>
         <br />
         <div>
-          {comparisonPay ? <p>Your pay in {comparisonYear} is equivalent to {formatCurrency(comparisonPayInCurrentTerms)} today</p> : null}
-          {comparisonPay && currentPay && isPayRise ? <p>Since {comparisonYear} you have had a real terms pay rise of {payChange}%</p> : null}
-          {comparisonPay && currentPay && !isPayRise ? <p>Since {comparisonYear} you have had a real terms pay cut of {payChange}%</p> : null}
+          {numberIsDefined(comparisonPay) && numberIsDefined(currentPay) && isPayRise ? <p>Since {comparisonYear} you have had a real terms pay rise of {realTermsPayChange}%, less than the {nominalTermsPayChange}% nominal pay rise the numbers might suggest</p> : null}
+          {numberIsDefined(comparisonPay) && numberIsDefined(currentPay) && !isPayRise ? <p>Since {comparisonYear} you have had a real terms pay cut of {realTermsPayChange}%</p> : null}
+          {numberIsDefined(comparisonPay) ? <p>Your pay in {comparisonYear} is equivalent to {formatCurrency(comparisonPayInCurrentTerms)} today</p> : null}
         </div>
       </form>
     </div>
