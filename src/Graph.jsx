@@ -68,7 +68,7 @@ function Graph(props) {
                 textAnchor="middle"
                 transform={`rotate(270 ${axisOffset - verticalTextPadding},${height - axisOffset - (axisLength)/2})`}
                 >
-                Real terms pay
+                Your real terms pay
             </text>
         </svg>
     );

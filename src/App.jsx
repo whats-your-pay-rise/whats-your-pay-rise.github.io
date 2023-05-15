@@ -52,7 +52,7 @@ function App() {
                       setProvisionalComparisonPay(e.target.valueAsNumber);
                       setShowResults(false);
                     }} />
-                  <label htmlFor="comparisonPayInput">What was your pay in {provisionalComparisonYear}?*</label>
+                  <label htmlFor="comparisonPayInput">Your pay in {provisionalComparisonYear}*</label>
                 </div>
               </div>
 
@@ -86,7 +86,7 @@ function App() {
                       setProvisionalCurrentPay(e.target.valueAsNumber);
                       setShowResults(false);
                     }} />
-                  <label htmlFor="currentPayInput">What is your pay now?</label>
+                  <label htmlFor="currentPayInput">Your pay now</label>
                 </div>
               </div>
 
@@ -103,7 +103,7 @@ function App() {
             <div className="col-md-8 offset-md-2">
               <div className="card">
                 <div className="card-header">
-                  Your results
+                  Results
                 </div>
                 <div>
                   <Graph
@@ -117,7 +117,7 @@ function App() {
                   {isPayRise ? <p>Since {comparisonYear} you have had a real terms pay rise of {realTermsPayChange}%</p> : null}
                   {isPayRise ? <p>This is less than the {nominalTermsPayChange}% nominal pay rise the numbers suggest</p> : null}
                   {!isPayRise ? <p>Since {comparisonYear} you have had a real terms <span className="text-danger">pay cut</span> of {realTermsPayChange}%</p> : null}
-                  {<p>Your pay in {comparisonYear} is equivalent to {formatCurrency(comparisonPayInCurrentTerms)} today</p>}
+                  {<p>Your {comparisonYear} pay is equivalent to {formatCurrency(comparisonPayInCurrentTerms)} today</p>}
                 </div>
               </div>
             </div>
