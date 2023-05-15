@@ -5,8 +5,6 @@ import Graph from './Graph';
 
 const formatCurrency = amount => `£${amount.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
-const numberIsDefined = input => input || input === 0;
-
 function App() {
   const [comparisonPay, setComparisonPay] = useState("");
   const [currentPay, setCurrentPay] = useState("");
@@ -49,7 +47,7 @@ function App() {
               <div className="input-group mb-3 px-3">
                 <span className="input-group-text">£</span>
                 <div className="form-floating">
-                  <input type="number" className="form-control" id="comparisonPayInput" aria-describedby="comparisonPay" placeholder='placeholder'
+                  <input type="number" step="0.01" className="form-control" id="comparisonPayInput" aria-describedby="comparisonPay" placeholder='placeholder'
                     onChange={e => {
                       setProvisionalComparisonPay(e.target.valueAsNumber);
                       setShowResults(false);
@@ -83,7 +81,7 @@ function App() {
               <div className="input-group mb-3 px-3">
                 <span className="input-group-text">£</span>
                 <div className="form-floating">
-                  <input type="number" className="form-control" id="currentPayInput" aria-describedby="currentPay" placeholder='placeholder'
+                  <input type="number" step="0.01" className="form-control" id="currentPayInput" aria-describedby="currentPay" placeholder='placeholder'
                     onChange={e => {
                       setProvisionalCurrentPay(e.target.valueAsNumber);
                       setShowResults(false);
@@ -97,7 +95,7 @@ function App() {
               </div> */}
             </div>
           </div>
-          <button type="submit" className="btn btn-primary btn-lg" disabled={!numberIsDefined(provisionalCurrentPay) || !numberIsDefined(provisionalComparisonPay)}>Calculate</button>
+          <button type="submit" className="btn btn-primary btn-lg" disabled={!(provisionalCurrentPay && provisionalComparisonPay)}>Calculate</button>
         </fieldset>
         <br />
         {showResults ?
