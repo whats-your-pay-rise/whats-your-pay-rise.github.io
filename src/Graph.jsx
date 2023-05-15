@@ -1,17 +1,15 @@
 function Graph(props) {
     const dimension = 200;
-    const height = dimension;
-    const width = dimension;
-
     const axisOffset = 20;
-    const axisLength = dimension - 2 * axisOffset;
-
     const barPadding = 10;
-    const barWidth = (axisLength - 3 * barPadding) / 2;
-
     const axisStrokeWidth = 2;
     const horizontalTextPadding = 5;
     const verticalTextPadding = 13;
+
+    const height = dimension;
+    const width = dimension;
+    const axisLength = dimension - 2 * axisOffset;
+    const barWidth = (axisLength - 3 * barPadding) / 2;
 
     return (
         <svg height={height} width={width}>
@@ -68,7 +66,7 @@ function Graph(props) {
                 textAnchor="middle"
                 transform={`rotate(270 ${axisOffset - verticalTextPadding},${height - axisOffset - (axisLength)/2})`}
                 >
-                Your real terms pay
+                Real terms pay
             </text>
         </svg>
     );

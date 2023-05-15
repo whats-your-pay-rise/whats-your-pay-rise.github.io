@@ -103,7 +103,7 @@ function App() {
             <div className="col-md-8 offset-md-2">
               <div className="card">
                 <div className="card-header">
-                  Results
+                  Your results
                 </div>
                 <div>
                   <Graph
