@@ -59,21 +59,26 @@ function App() {
               {/* <div id="passwordHelpBlock" className="form-text">
                 Guidance on inserting your old pay.
               </div> */}
-              <details open={showComparisonYearSelector} onClick={e => {
-                e.preventDefault();
-                setShowComparisonYearSelector(!showComparisonYearSelector);
-              }}>
-                <summary className="link-primary">*Weren't working in {provisionalComparisonYear}?</summary>
-                <p onClick={e => e.stopPropagation()}>Select a year when you were working:</p>
-                <select className="form-select" id="comparisonYearSelect" value={provisionalComparisonYear} onClick={e => e.stopPropagation()}
-                  onChange={e => {
-                    setProvisionalComparisonYear(parseInt(e.target.value, 10));
-                    setShowComparisonYearSelector(false);
-                    setShowResults(false);
-                  }}>
-                  {data.slice(0, -1).map(entry => <option key={entry.year}>{entry.year}</option>)}
-                </select>
-              </details>
+              <div className="text-start px-3">
+                <details open={showComparisonYearSelector} onClick={e => {
+                  e.preventDefault();
+                  setShowComparisonYearSelector(!showComparisonYearSelector);
+                }}>
+                  <summary className="link-primary">*Weren't working in {provisionalComparisonYear}?</summary>
+                  <div className="animate-details">
+                    <p onClick={e => e.stopPropagation()}>Select a year when you were working:</p>
+                    <select className="form-select" id="comparisonYearSelect" value={provisionalComparisonYear} onClick={e => e.stopPropagation()}
+                      onChange={e => {
+                        setProvisionalComparisonYear(parseInt(e.target.value, 10));
+                        setShowComparisonYearSelector(false);
+                        setShowResults(false);
+                      }}>
+                      {data.slice(0, -1).map(entry => <option key={entry.year}>{entry.year}</option>)}
+                    </select>
+                  </div>
+                </details>
+              </div>
+
               <br />
             </div>
 
@@ -100,7 +105,7 @@ function App() {
         <br />
         {showResults ?
           <div className="row">
-            <div className="col-md-8 offset-md-2">
+            <div className="col-md-8 offset-md-2 results-card">
               <div className="card">
                 <div className="card-header">
                   Your results

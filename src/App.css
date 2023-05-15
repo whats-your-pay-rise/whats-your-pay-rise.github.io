@@ -1,0 +1,56 @@
+summary {
+    margin-left: 1rem;
+    position: relative;
+}
+
+summary:before {
+    content: '';
+    border-width: .4rem;
+    border-style: solid;
+    border-color: transparent transparent transparent #008cba;
+    position: absolute;
+    top: 0.4rem;
+    left: -0.8rem;
+    transform: rotate(0);
+    transform-origin: .2rem 50%;
+    transition: .25s transform ease;
+}
+
+details[open]>summary:before {
+    transform: rotate(90deg);
+}
+
+
+details summary::-webkit-details-marker,
+details summary::marker {
+    display: none;
+    content: "";
+}
+
+@keyframes append-animate {
+	from {
+        max-height: 0px;
+	}
+	to {
+        max-height: 100px;
+	}
+}
+
+@keyframes append-animate-large {
+	from {
+        max-height: 0px;
+	}
+	to {
+        max-height: 400px;
+	}
+}
+
+details[open] .animate-details {
+	animation: append-animate .3s linear;
+    overflow: hidden;
+}
+
+.results-card {
+    animation: append-animate-large .3s linear;
+    overflow: hidden;
+}
