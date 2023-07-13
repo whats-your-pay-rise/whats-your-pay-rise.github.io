@@ -13,7 +13,7 @@ const data = [
     { year: 2020, index: 108.7 },
     { year: 2021, index: 111.6 },
     { year: 2022, index: 121.7 },
-    { year: 2023, index: 130.4 }
+    { year: 2023, index: 131.3 }
   ];
 
 export default data;
