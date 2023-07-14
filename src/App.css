@@ -10,45 +10,6 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-summary {
-    margin-left: 1rem;
-    position: relative;
-}
-
-summary:before {
-    content: '';
-    border-width: .4rem;
-    border-style: solid;
-    border-color: transparent transparent transparent #008cba;
-    position: absolute;
-    top: 0.4rem;
-    left: -0.8rem;
-    transform: rotate(0);
-    transform-origin: .2rem 50%;
-    transition: .25s transform ease;
-}
-
-details[open]>summary:before {
-    transform: rotate(90deg);
-}
-
-
-details summary::-webkit-details-marker,
-details summary::marker {
-    display: none;
-    content: "";
-}
-
-@keyframes append-animate {
-    from {
-        max-height: 0px;
-    }
-
-    to {
-        max-height: 100px;
-    }
-}
-
 @keyframes append-animate-large {
     from {
         max-height: 0px;
@@ -59,22 +20,17 @@ details summary::marker {
     }
 }
 
-details[open] .animate-details {
-    animation: append-animate .3s linear;
-    overflow: hidden;
-}
-
 .results-card {
     animation: append-animate-large .3s linear;
     overflow: hidden;
 }
 
 .form-floating>label,
-.form-select {
+.form-select,
+.input-group-text {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 18px;
     font-weight: 400;
-    line-height: 34px;
     letter-spacing: 0em;
     text-align: left;
 
@@ -84,7 +40,45 @@ details[open] .animate-details {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 18px;
     font-weight: 700;
-    line-height: 34px;
     letter-spacing: 0em;
     text-align: left;
+}
+
+.btn.btn-calculate,
+.btn.btn-calculate:hover,
+.btn.btn-calculate:focus,
+.btn.btn-calculate:active,
+/* for precedence over an existing style */
+:not(.btn-check) + .btn.btn-calculate:active {
+    height: 36px;
+    width: 139px;
+    border-radius: 18px;
+    padding: 1px 21px 1px 21px;
+    background: #C06734;
+    border: none;
+
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.btn.btn-calculate:disabled {
+    background: #F89055;
+}
+
+.results-graph {
+    border: black;
+    border-width: 1px;
+    border-style: solid;
+    width: fit-content;
+}
+
+.profession-card-contents {
+    font-family: Space Grotesk, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
 }

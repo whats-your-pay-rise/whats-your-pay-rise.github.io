@@ -1,10 +1,9 @@
-.feature {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 4rem;
-    width: 4rem;
-    font-size: 2rem;
+.nav-container {
+  box-shadow: 0px 2px 0px rgba(248, 144, 85, 0.5);
+}
+
+.container {
+  border-bottom: 1px solid black;
 }
 
 .navbar-brand {
@@ -13,7 +12,16 @@
   font-weight: 400;
   line-height: 27px;
   letter-spacing: 0em;
-  text-align: left;
+}
+
+.nav-link {
+  font-family: Space Mono, monospace;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+
+  border: orange 1px solid;
+  text-align: center;
 }
 
 h1 {
@@ -22,14 +30,92 @@ h1 {
   font-weight: 700;
   line-height: 36px;
   letter-spacing: 0.05em;
-  text-align: left;
 }
 
-body {
+p {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 34px;
   letter-spacing: 0em;
-  text-align: left;
+}
+
+.profession-card-heading {
+  font-family: Space Mono, monospace;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0em;
+
+  background: #D9D9D9;
+}
+
+.profession-card-percentage {
+  font-family: Space Grotesk, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 51px;
+  letter-spacing: 0em;
+}
+
+.profession-card:nth-child(2n-1) {
+  background: #E4E4E4;
+}
+
+.profession-card:nth-child(2n) {
+  background: #F3F2F2;
+}
+
+h3 {
+  font-family: Space Mono, monospace;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0.05em;
+}
+
+.faqs-wrapper {
+  border: 1px solid #000000;
+  box-shadow: 4px 4px 0px 0px #00000040;
+}
+
+.accordion-button {
+  background: linear-gradient(0deg, #F3F2F2, #F3F2F2),
+    linear-gradient(0deg, #000000, #000000);
+  border-bottom: 2px solid #000000;
+
+  font-family: Space Grotesk, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+}
+
+.accordion-button:not(.collapsed) {
+  color: black;
+}
+
+.accordion-body p {
+  font-family: Space Grotesk, monospace;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+}
+
+footer p {
+  font-family: Space Grotesk;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+}
+
+.header-image {
+  width: 99.37696838378906px;
+  height: 83.00004577636719px;
+}
+
+.accordion-item {
+  border: none;
 }

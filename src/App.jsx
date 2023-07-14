@@ -1,7 +1,9 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import data from './data';
 import Graph from './Graph';
+import Input from './components/Input';
+import Select from './components/Select';
 
 const formatCurrency = amount => `£${amount.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
@@ -44,65 +46,43 @@ function App() {
             wage, or anything in between.</p>
           <form onSubmit={onSubmit}>
             <fieldset>
-              <div className="input-group mb-3 px-3">
-                <label className="input-group-text rounded-0 bg-body" for="comparisonYearSelect">Year you started work</label>
-                <select className="form-select form-select-lg rounded-0" id="comparisonYearSelect" value={provisionalComparisonYear}
-                  onChange={e => {
-                    setProvisionalComparisonYear(parseInt(e.target.value, 10));
-                    setShowResults(false);
-                  }}>
-                  {data.slice(0, -1).map((entry, i) => <option key={entry.year} value={entry.year}>{entry.year}</option>)}
-                </select>
-              </div>
-              <div className="input-group mb-3 px-3">
-                <span className="input-group-text rounded-0 bg-body">£</span>
-                <div className="form-floating">
-                  <input type="number" step="0.01" className="form-control rounded-0" id="comparisonPayInput" aria-describedby="comparisonPay" placeholder='placeholder'
-                    onChange={e => {
-                      setProvisionalComparisonPay(e.target.valueAsNumber);
-                      setShowResults(false);
-                    }} />
-                  <label htmlFor="comparisonPayInput">Your pay in <span className="font-weight-bold">{provisionalComparisonYear}</span></label>
-                </div>
-              </div>
-              <div className='col-md'>
-                <div className="input-group mb-3 px-3">
-                  <span className="input-group-text rounded-0 bg-body">£</span>
-                  <div className="form-floating">
-                    <input type="number" step="0.01" className="form-control rounded-0" id="currentPayInput" aria-describedby="currentPay" placeholder='placeholder'
-                      onChange={e => {
-                        setProvisionalCurrentPay(e.target.valueAsNumber);
-                        setShowResults(false);
-                      }} />
-                    <label htmlFor="currentPayInput">Your pay <span className="font-weight-bold">now</span></label>
-                  </div>
-                </div>
-              </div>
-              <button type="submit" className="btn btn-primary btn-lg" disabled={!(provisionalCurrentPay && provisionalComparisonPay)}>Calculate</button>
+              <Select
+                label="Year you started work"
+                value={provisionalComparisonYear}
+                setValue={setProvisionalComparisonYear}
+                options={data.slice(0, -1).map(entry => entry.year)}
+                isPristine={setShowResults}
+              />
+              <Input
+                label={<Fragment>Your pay in <span className="font-weight-bold">{provisionalComparisonYear}</span></Fragment>}
+                setValue={setProvisionalComparisonPay}
+                isPristine={setShowResults}
+              />
+              <Input
+                label={<Fragment>Your pay <span className="font-weight-bold">now</span></Fragment>}
+                setValue={setProvisionalCurrentPay}
+                isPristine={setShowResults}
+              />
+              <button type="submit" className="btn btn-calculate btn-primary" disabled={!(provisionalCurrentPay && provisionalComparisonPay)}>CALCULATE</button>
             </fieldset>
           </form>
         </div>
         {showResults ?
-          <div className="col-md-8 offset-md-2 results-card">
-            <div className="card">
-              <div className="card-header">
-                Your results
-              </div>
-              <div>
-                <Graph
-                  comparisonPay={comparisonPayInCurrentTerms}
-                  currentPay={currentPay}
-                  comparisonYear={comparisonYear}
-                  currentYear={currentYear}
-                />
-              </div>
-              <div className="card-body">
-                {isPayRise ? <p>Since {comparisonYear} you have had a real terms pay rise of {realTermsPayChange}%</p> : null}
-                {isPayRise ? <p>This is less than the {nominalTermsPayChange}% nominal pay rise the numbers suggest</p> : null}
-                {!isPayRise ? <p>Since {comparisonYear} you have had a real terms <span className="text-danger">pay cut</span> of {realTermsPayChange}%</p> : null}
-                {<p>Your {comparisonYear} pay is equivalent to {formatCurrency(comparisonPayInCurrentTerms)} today</p>}
-                <a target="_blank" rel="noreferrer" className="btn btn-primary btn-lg" href="https://twitter.com/intent/tweet?text=Know%20how%20inflation%20has%20impacted%20your%20pay%3F%0A%0AFind%20out%20at%20https%3A%2F%2Fwhatsyourwageworth.com%2C%20you%20may%20be%20surprised!" role="button">Share on Twitter</a>
-              </div>
+          <div className='results-card'>
+            {/* <div className="results-graph"> */}
+              <Graph
+                comparisonPay={comparisonPayInCurrentTerms}
+                currentPay={currentPay}
+                comparisonYear={comparisonYear}
+                currentYear={currentYear}
+              />
+            {/* </div> */}
+            <div className="card-body">
+              {isPayRise ? <p>Since {comparisonYear} you have had a real terms pay rise of {realTermsPayChange}%</p> : null}
+              {isPayRise ? <p>This is less than the {nominalTermsPayChange}% nominal pay rise you might have expected</p> : null}
+              {!isPayRise ? <p>Since {comparisonYear} you have had a real terms <span className="text-danger">pay cut</span> of {realTermsPayChange}%</p> : null}
+              {<p>Your {comparisonYear} pay is equivalent to {formatCurrency(comparisonPayInCurrentTerms)} today</p>}
+              {/* <a target="_blank" rel="noreferrer" className="btn btn-primary btn-lg" href="https://twitter.com/intent/tweet?text=Know%20how%20inflation%20has%20impacted%20your%20pay%3F%0A%0AFind%20out%20at%20https%3A%2F%2Fwhatsyourwageworth.com%2C%20you%20may%20be%20surprised!" role="button">Share on Twitter</a> */}
             </div>
           </div> : null}
       </div >
