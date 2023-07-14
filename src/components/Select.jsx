@@ -4,14 +4,14 @@ function Select(props) {
   const id = uuid();
 
   return (
-    <div className="input-group mb-3 px-3">
+    <div className="input-group">
       <label
-        className="input-group-text rounded-0 bg-body"
+        className="input-group-text"
         htmlFor={id}>
         {props.label}
       </label>
       <select
-        className="form-select form-select-lg rounded-0"
+        className="form-select form-select-lg"
         id={id}
         value={props.value}
         onChange={e => {

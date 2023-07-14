@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, Fragment } from 'react';
 import data from './data';
-import Graph from './Graph';
+import Graph from './components/Graph';
 import Input from './components/Input';
 import Select from './components/Select';
 
@@ -39,9 +39,9 @@ function App() {
   };
 
   return (
-    <div className="App container">
+    <div className="container">
       <div className="row">
-        <div className='col-md'>
+        <div className="">
           <p className="">Enter your pay below to find out the full cost of inflation. Try your annual salary, your hourly
             wage, or anything in between.</p>
           <form onSubmit={onSubmit}>
@@ -77,7 +77,7 @@ function App() {
                 currentYear={currentYear}
               />
             {/* </div> */}
-            <div className="card-body">
+            <div className="">
               {isPayRise ? <p>Since {comparisonYear} you have had a real terms pay rise of {realTermsPayChange}%</p> : null}
               {isPayRise ? <p>This is less than the {nominalTermsPayChange}% nominal pay rise you might have expected</p> : null}
               {!isPayRise ? <p>Since {comparisonYear} you have had a real terms <span className="text-danger">pay cut</span> of {realTermsPayChange}%</p> : null}

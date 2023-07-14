@@ -1,5 +1,17 @@
 $body-bg: #FFFDF8;
 $border-radius: 0;
 $link-color: black;
+$body-tertiary-bg: $body-bg;
+$card-border-width: 0;
+$card-spacer-y: 0;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 429px,
+  md: 835px,
+  lg: 1513px,
+  xl: 1600px,
+  xxl: 1700px
+);
 
 @import '~bootstrap/scss/bootstrap.scss';

@@ -4,8 +4,8 @@ function Input(props) {
   const id = uuid();
 
   return (
-    <div className="input-group mb-3 px-3">
-      <span className="input-group-text bg-body">
+    <div className="input-group">
+      <span className="input-group-text">
         £
       </span>
       <div className="form-floating">
