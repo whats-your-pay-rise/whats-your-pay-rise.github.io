@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid';
+import { useState } from 'react';
 
 function Select(props) {
-  const id = uuid();
+  const [id] = useState(uuid());
 
   return (
     <div className="input-group">
@@ -14,10 +15,8 @@ function Select(props) {
         className="form-select form-select-lg"
         id={id}
         value={props.value}
-        onChange={e => {
-          props.setValue(parseInt(e.target.value, 10));
-          props.isPristine(false);
-        }}>
+        onChange={e => props.setValue(parseInt(e.target.value, 10))}
+      >
         {props.options.map(option =>
           <option
             key={option}>

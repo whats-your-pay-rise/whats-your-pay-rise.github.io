@@ -15,7 +15,7 @@ function Graph(props) {
     const nowBarHeight = yAxisLength * 0.7 * props.currentPay / Math.max(props.comparisonPay, props.currentPay);
 
     return (
-        <svg height={height} width={width} xmlns="http://www.w3.org/2000/svg">
+        <svg width="100%" viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(i =>
                 <line
                     x1={0}
@@ -81,7 +81,7 @@ function Graph(props) {
                 >
                 Real terms pay
             </text> */}
-            <rect x="0.5" y="0.5" width={width - 1} height={height - 1} stroke="black" stroke-width="1" fill="none" />
+            <rect x="0.5" y="0.5" width={width - 1} height={height - 1} stroke="black" strokeWidth="1" fill="none" />
         </svg>
     );
 }

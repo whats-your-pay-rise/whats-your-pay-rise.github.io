@@ -17,7 +17,7 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description"
     content="Think you know how much you're paid?  Think again.  Find out what impact inflation has had on your pay over the past 13 years." />
-  <title>What's Your Wage Worth?</title>
+  <title>What's your wage worth?</title>
   <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
   <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -43,53 +43,59 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div class="container nav-container">
-    <nav class="navbar navbar-expand navbar-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#!">What's Your Wage Worth?</a>
-        <div class="navbar-nav">
-          <a class="nav-link" href="#!">FAQs</a>
-        </div>
-      </div>
-    </nav>
-  </div>
-  <div class="container">
     <div class="row">
-      <header class="">
-        <h1 class="">Know how inflation has impacted your pay?</h1>
-      </header>
-      <img class="header-image" src="./mobile-graph.svg"/>
+      <nav class="navbar navbar-expand navbar-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#!">What's your wage worth?</a>
+          <div class="navbar-nav">
+            <a class="nav-link" href="#!">FAQs</a>
+          </div>
+        </div>
+      </nav>
     </div>
   </div>
+  <section>
+    <div class="container header-container">
+      <div class="row align-items-end">
+        <header class="col-8">
+          <h1 class="">Know how inflation has impacted your pay?</h1>
+        </header>
+        <div class="col-4 header-image-container">
+          <img class="header-image" src="./mobile-graph.svg" />
+        </div>
+      </div>
+    </div>
+  </section>
   <section>
     <div id="root"></div>
   </section>
   <section>
-    <div class="container">
-      <div class="row">
+    <div class="container professions-container">
+      <div class="row profession-row">
         <div class="card profession-card">
           <div class="card-body text-center">
             <div class="profession-card-heading">
               <p class="profession-card-heading">Nurses</p>
             </div>
-            <p class="profession-card-percentage">11%</h3>
+            <p class="profession-card-percentage">11%</p>
             <p class="profession-card-contents">starting salary pay cut since 2010</p>
           </div>
         </div>
         <div class="card profession-card">
           <div class="card-body text-center">
             <div class="profession-card-heading">
-              <p class="profession-card-heading">Nurses</p>
+              <p class="profession-card-heading">Teachers</p>
             </div>
-            <p class="profession-card-percentage">11%</h3>
-            <p class="profession-card-contents">starting salary pay cut since 2010</p>
+            <p class="profession-card-percentage">17%</p>
+            <p class="profession-card-contents">pay cut for newly-qualified teachers since 2010</p>
           </div>
         </div>
         <div class="card profession-card">
           <div class="card-body text-center">
             <div class="profession-card-heading">
-              <p class="profession-card-heading">Nurses</p>
+              <p class="profession-card-heading">Firefighters</p>
             </div>
-            <p class="profession-card-percentage">11%</h3>
+            <p class="profession-card-percentage">11%</p>
             <p class="profession-card-contents">starting salary pay cut since 2010</p>
           </div>
         </div>
@@ -98,9 +104,9 @@
     </div>
   </section>
   <section>
-    <div class="container">
+    <div class="container faqs-container">
       <div class="faqs-wrapper">
-        <h3 class="text-center">FAQs</h3>
+        <p class="text-center faqs-title">FAQs</p>
         <div class="accordion">
           <div class="accordion-item">
             <div class="accordion-header">
@@ -174,9 +180,9 @@
             </div>
             <div id="faqs-5" class="accordion-collapse collapse">
               <div class="accordion-body">
-                This calculator uses the Office for National Stastics' (ONS) estimates of the <a
+                <p>This calculator uses the Office for National Stastics' (ONS) estimates of the <a
                   href="https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt/mm23?referrer=search&searchTerm=d7bt">Consumer
-                  Price Index.</a>
+                  Price Index.</a></p>
               </div>
             </div>
           </div>
@@ -185,7 +191,7 @@
       <!-- <a class="btn btn-primary btn-lg" href="#!">Call to action</a> -->
     </div>
   </section>
-  <div class="container">
+  <div class="container footer-container">
     <footer class="">
       <div class="row">
         <div class="col">

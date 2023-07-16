@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid';
+import { useState } from 'react';
 
 function Input(props) {
-  const id = uuid();
+  const [id] = useState(uuid());
 
   return (
     <div className="input-group">
@@ -15,10 +16,9 @@ function Input(props) {
           className="form-control"
           id={id}
           placeholder='placeholder'
-          onChange={e => {
-            props.setValue(e.target.valueAsNumber);
-            props.isPristine(false);
-          }} />
+          onChange={e => props.setValue(e.target.valueAsNumber)}
+          onWheel={e => e.target.blur()}
+        />
         <label htmlFor={id}>{props.label}</label>
       </div>
     </div>
