@@ -24,3 +24,281 @@ $grid-breakpoints: (
 );
 
 @import '~bootstrap/scss/bootstrap.scss';
+
+
+// Layout
+
+.profession-card {
+  padding: 0;
+}
+
+.profession-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.faqs-title {
+  margin-bottom: 36px;
+}
+
+.faqs-wrapper {
+  padding-left: 22px;
+  padding-right: 22px;
+  padding-top: 42px;
+  padding-bottom: 53px;
+}
+
+.container {
+  padding-left: 46px;
+  padding-right: 46px;
+}
+
+.nav-container,
+.header-container {
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.form-container {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.results-container {
+  padding-top: 48px;
+  padding-bottom: 32px;
+}
+
+.professions-container {
+  padding: 0px;
+}
+
+.faqs-container {
+  padding: 34px 18px;
+}
+
+.header-image {
+  width: 100%;
+}
+
+.footer-container {
+  padding: 27px 25px 38px;
+}
+
+.card-body {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.results-graph {
+  margin-bottom: 16px;
+}
+
+.input-group {
+  margin-top: 14px;
+  margin-bottom: 24px;
+}
+
+.profession-card-heading p {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+// Typography
+
+
+
+
+
+// Colours
+
+.nav-container {
+  box-shadow: 0px 2px 0px rgba(240, 126, 61, 0.5);
+}
+
+.container {
+  border-bottom: 1px solid black;
+}
+
+.navbar-brand {
+  font-family: Space Mono, monospace;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.nav-link {
+  font-family: Space Mono, monospace;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+
+  color: black;
+
+  border: #f89055 1px solid;
+  text-align: center;
+
+  padding: 4px;
+}
+
+h1 {
+  font-family: Space Mono, monospace;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 2.125;
+}
+
+.profession-card-heading p {
+  font-family: Space Mono, monospace;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.profession-card-heading {
+  background: #D9D9D9;
+}
+
+.profession-card-percentage {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.275;
+}
+
+.profession-card:nth-child(2n-1) > .card-body {
+  background: #E4E4E4;
+}
+
+.profession-card:nth-child(2n) > .card-body {
+  background: #F3F2F2;
+}
+
+.faqs-title {
+  font-family: Space Mono, monospace;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+.faqs-wrapper {
+  border: 1px solid #000000;
+  box-shadow: 4px 4px 0px 0px #00000040;
+}
+
+.accordion-button {
+  background: linear-gradient(0deg, #F3F2F2, #F3F2F2),
+    linear-gradient(0deg, #000000, #000000);
+  border-bottom: 2px solid #000000;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.accordion-button:not(.collapsed) {
+  color: black;
+}
+
+.accordion-body p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+footer p {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.accordion-item {
+  border: none;
+}
+
+.footer-container {
+  background: #F3F2F2;
+  border-bottom: none;
+  border-top: 1px solid #000;
+}
+
+.profession-card-contents {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.form-floating>label,
+.form-select,
+.input-group-text {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.input-group {
+    border: 1px solid #000;
+    box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.form-floating>label>.font-weight-bold {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.btn.btn-calculate,
+.btn.btn-calculate:hover,
+.btn.btn-calculate:focus,
+.btn.btn-calculate:active,
+/* for precedence over an existing style */
+:not(.btn-check)+.btn.btn-calculate:active {
+    height: 36px;
+    width: 139px;
+    border-radius: 18px;
+    padding: 4px 21px 8px 21px;
+    background: #C06734;
+    border: none;
+
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.btn.btn-calculate:disabled {
+    background: #F89055;
+}
+
+
+// Appearance
+
+/* Works for Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Works for Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+@keyframes append-animate-large {
+    from {
+        max-height: 0px;
+    }
+
+    to {
+        max-height: 400px;
+    }
+}
+
+.results-card {
+    animation: append-animate-large .3s linear;
+    overflow: hidden;
+}

@@ -1,4 +1,3 @@
-import './App.css';
 import { useState, Fragment, useRef } from 'react';
 import data from './data';
 import Graph from './components/Graph';
