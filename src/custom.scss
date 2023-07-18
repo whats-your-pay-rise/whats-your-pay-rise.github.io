@@ -13,16 +13,6 @@ $accordion-body-padding-y: 14px;
 $accordion-button-padding-x: 29px;
 $accordion-button-padding-y: 19px;
 
-
-$grid-breakpoints: (
-  xs: 0,
-  sm: 429px,
-  md: 835px,
-  lg: 1513px,
-  xl: 1600px,
-  xxl: 1700px
-);
-
 @import '~bootstrap/scss/bootstrap.scss';
 
 
@@ -64,6 +54,10 @@ $grid-breakpoints: (
   padding-bottom: 48px;
 }
 
+.form-col {
+  padding-bottom: 48px;
+}
+
 .results-container {
   padding-top: 48px;
   padding-bottom: 32px;
@@ -85,9 +79,11 @@ $grid-breakpoints: (
   padding: 27px 25px 38px;
 }
 
-.card-body {
-  padding-left: 100px;
-  padding-right: 100px;
+@include media-breakpoint-down(md) {
+  .card-body {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
 }
 
 .results-graph {
@@ -106,16 +102,49 @@ $grid-breakpoints: (
 
 // Typography
 
+@mixin medium-font-size {
+  font-size: 24px;
+
+  @include media-breakpoint-up(md) {
+    font-size: 36px;
+  }  
+
+  @include media-breakpoint-up(md) {
+    font-size: 46px;
+  }  
+}
+
+@mixin small-font-size {
+  font-size: 14px;
+
+  @include media-breakpoint-up(md) {
+    font-size: 16px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 20px;
+  }  
+}
+
 .navbar-brand {
-  font-family: Space Mono, monospace;
-  font-size: 18px;
+  font-family: $font-family-monospace;
   font-weight: 400;
+  font-size: 18px;
+
+  @include media-breakpoint-up(md) {
+    font-size: 24px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 30px;
+  }
+
   line-height: 1.5;
 }
 
 .nav-link {
-  font-family: Space Mono, monospace;
-  font-size: 14px;
+  font-family: $font-family-monospace;
+  @include small-font-size;
   font-weight: 400;
   letter-spacing: 0.1em;
 
@@ -125,8 +154,8 @@ $grid-breakpoints: (
 }
 
 h1 {
-  font-family: Space Mono, monospace;
-  font-size: 24px;
+  font-family: $font-family-monospace;
+  @include medium-font-size;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: 0.05em;
@@ -136,6 +165,11 @@ p {
   font-size: 16px;
   font-weight: 400;
   line-height: 2.125;
+
+  @include media-breakpoint-up(md) {
+    font-size: 20px;
+    line-height: 1.7;
+  }
 }
 
 .profession-card-heading p {
@@ -149,11 +183,25 @@ p {
   font-size: 40px;
   font-weight: 700;
   line-height: 1.275;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 50px;
+  }
+}
+
+.profession-card-contents {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 20px;
+  }
 }
 
 .faqs-title {
   font-family: Space Mono, monospace;
-  font-size: 24px;
+  @include medium-font-size;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: 0.05em;
@@ -167,6 +215,10 @@ p {
   font-size: 16px;
   font-weight: 700;
   line-height: 1.25;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 24px;
+  }
 }
 
 .accordion-button:not(.collapsed) {
@@ -174,7 +226,7 @@ p {
 }
 
 .accordion-body p {
-  font-size: 14px;
+  @include small-font-size;
   font-weight: 400;
   line-height: 1.43;
 }
@@ -183,12 +235,10 @@ footer p {
   font-size: 10px;
   font-weight: 400;
   line-height: 1.3;
-}
 
-.profession-card-contents {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.25;
+  @include media-breakpoint-up(md) {
+    font-size: 12px;
+  }
 }
 
 .form-floating>label,
@@ -211,6 +261,10 @@ footer p {
 :not(.btn-check)+.btn.btn-calculate:active {
     font-size: 18px;
     font-weight: 400;
+
+    @include media-breakpoint-up(md) {
+      font-size: 24px;
+    }
 }
 
 
@@ -276,6 +330,10 @@ footer p {
     padding: 6px 21px 6px 21px;
     background: #C06734;
     border: none;
+
+    @include media-breakpoint-up(md) {
+      padding: 2px 23px 2px 23px;
+    }
 }
 
 .btn.btn-calculate:disabled {
@@ -295,19 +353,4 @@ input::-webkit-inner-spin-button {
 /* Works for Firefox */
 input[type="number"] {
     -moz-appearance: textfield;
-}
-
-@keyframes append-animate-large {
-    from {
-        max-height: 0px;
-    }
-
-    to {
-        max-height: 400px;
-    }
-}
-
-.results-card {
-    animation: append-animate-large .3s linear;
-    overflow: hidden;
 }
