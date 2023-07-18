@@ -55,11 +55,8 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with CRA
         run: |
-          echo "$GITHUB_CONTEXT"
+          PUBLIC_URL=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.html_url')
           ${{ steps.detect-package-manager.outputs.runner }} run build
-        env:
-          PUBLIC_URL: https://12v.github.io/whats-you-wage-worth
-          GITHUB_CONTEXT: ${{ toJson(github) }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
