@@ -3,9 +3,7 @@ function Graph(props) {
     const width = 346;
     const axisOffset = 0;
     const barPadding = 40;
-    const axisStrokeWidth = 2;
     const horizontalTextPadding = -5;
-    const verticalTextPadding = 0;
 
     const xAxisLength = width - 2 * axisOffset;
     const yAxisLength = height - 2 * axisOffset;
