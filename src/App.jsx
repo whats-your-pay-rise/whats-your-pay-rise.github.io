@@ -1,7 +1,8 @@
-import './App.css';
-import { useState } from 'react';
+import { useState, Fragment, useRef } from 'react';
 import data from './data';
-import Graph from './Graph';
+import Graph from './components/Graph';
+import Input from './components/Input';
+import Select from './components/Select';
 
 const formatCurrency = amount => `£${amount.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
@@ -13,8 +14,6 @@ function App() {
   const [provisionalComparisonPay, setProvisionalComparisonPay] = useState("");
   const [provisionalCurrentPay, setProvisionalCurrentPay] = useState("");
   const [provisionalComparisonYear, setProvisionalComparisonYear] = useState(comparisonYear);
-
-  const [showComparisonYearSelector, setShowComparisonYearSelector] = useState(false);
 
   const [showResults, setShowResults] = useState(false);
 
@@ -30,106 +29,72 @@ function App() {
   const realTermsPayChange = Math.round(Math.abs(100 * (currentPay - comparisonPayInCurrentTerms) / comparisonPayInCurrentTerms));
   const nominalTermsPayChange = Math.round(Math.abs(100 * (currentPay - comparisonPay) / comparisonPay));
 
+  const scrollRef = useRef(null);
+
   const onSubmit = event => {
     setComparisonPay(provisionalComparisonPay);
     setCurrentPay(provisionalCurrentPay);
     setComparisonYear(provisionalComparisonYear);
     setShowResults(true);
+    setTimeout(() => scrollRef.current.scrollIntoView({ block: "nearest", inline: "nearest", behavior: 'smooth' }));
     event.preventDefault();
   };
 
   return (
-    <div className="App">
-      <form onSubmit={onSubmit}>
-        <fieldset>
-          <div className='row'>
-            <div className='col-md'>
-              <div className="input-group mb-3 px-3">
-                <span className="input-group-text">£</span>
-                <div className="form-floating">
-                  <input type="number" step="0.01" className="form-control" id="comparisonPayInput" aria-describedby="comparisonPay" placeholder='placeholder'
-                    onChange={e => {
-                      setProvisionalComparisonPay(e.target.valueAsNumber);
-                      setShowResults(false);
-                    }} />
-                  <label htmlFor="comparisonPayInput">Your pay in {provisionalComparisonYear}*</label>
-                </div>
-              </div>
-
-              {/* <div id="passwordHelpBlock" className="form-text">
-                Guidance on inserting your old pay.
-              </div> */}
-              <div className="text-start px-3">
-                <details open={showComparisonYearSelector} onClick={e => {
-                  e.preventDefault();
-                  setShowComparisonYearSelector(!showComparisonYearSelector);
-                }}>
-                  <summary className="link-primary">*Weren't working in {provisionalComparisonYear}?</summary>
-                  <div className="animate-details">
-                    <p onClick={e => e.stopPropagation()}>Select a year when you were working:</p>
-                    <select className="form-select" id="comparisonYearSelect" value={provisionalComparisonYear} onClick={e => e.stopPropagation()}
-                      onChange={e => {
-                        setProvisionalComparisonYear(parseInt(e.target.value, 10));
-                        setShowComparisonYearSelector(false);
-                        setShowResults(false);
-                      }}>
-                      {data.slice(0, -1).map(entry => <option key={entry.year}>{entry.year}</option>)}
-                    </select>
-                  </div>
-                </details>
-              </div>
-
-              <br />
-            </div>
-
-            <div className='col-md'>
-              <div className="input-group mb-3 px-3">
-                <span className="input-group-text">£</span>
-                <div className="form-floating">
-                  <input type="number" step="0.01" className="form-control" id="currentPayInput" aria-describedby="currentPay" placeholder='placeholder'
-                    onChange={e => {
-                      setProvisionalCurrentPay(e.target.valueAsNumber);
-                      setShowResults(false);
-                    }} />
-                  <label htmlFor="currentPayInput">Your pay now</label>
-                </div>
-              </div>
-
-              {/* <div id="passwordHelpBlock" className="form-text">
-                Guidance on inserting your new pay.
-              </div> */}
-            </div>
+    <div className="container form-container">
+      <div className="row">
+        <div className="col-12 col-lg-6 form-col">
+          <p className="">Enter your pay below to find out the full cost of inflation. Try your annual salary, your hourly
+            wage, or anything in between.</p>
+          <form onSubmit={onSubmit}>
+            <fieldset>
+              <Select
+                label="Year you started work"
+                value={provisionalComparisonYear}
+                setValue={value => {
+                  setProvisionalComparisonYear(value);
+                  setShowResults(false);
+                }}
+                options={data.slice(0, -1).map(entry => entry.year)}
+              />
+              <Input
+                label={<Fragment>Your pay in <span className="font-weight-bold">{provisionalComparisonYear}</span></Fragment>}
+                setValue={value => {
+                  setProvisionalComparisonPay(value);
+                  setShowResults(false);
+                }}
+              />
+              <Input
+                label={<Fragment>Your pay <span className="font-weight-bold">now</span></Fragment>}
+                setValue={value => {
+                  setProvisionalCurrentPay(value);
+                  setShowResults(false);
+                }}
+              />
+              <button type="submit" className="btn btn-calculate btn-primary" disabled={!(provisionalCurrentPay && provisionalComparisonPay)}>CALCULATE</button>
+            </fieldset>
+          </form>
+        </div>
+        <div className={`${showResults ? "col-12" : "d-none d-lg-block"} col-lg-5 offset-lg-1`} ref={scrollRef} style={showResults ? {} : { filter: "blur(4px) grayscale(1) contrast(0.6)" }}>
+          <div className='results-graph'>
+            <Graph
+              comparisonPay={showResults ? comparisonPayInCurrentTerms : 10000}
+              currentPay={showResults ? currentPay : 8000}
+              comparisonYear={showResults ? comparisonYear : 2010}
+              currentYear={currentYear}
+            />
           </div>
-          <button type="submit" className="btn btn-primary btn-lg" disabled={!(provisionalCurrentPay && provisionalComparisonPay)}>Calculate</button>
-        </fieldset>
-        <br />
-        {showResults ?
-          <div className="row">
-            <div className="col-md-8 offset-md-2 results-card">
-              <div className="card">
-                <div className="card-header">
-                  Your results
-                </div>
-                <div>
-                  <Graph
-                    comparisonPay={comparisonPayInCurrentTerms}
-                    currentPay={currentPay}
-                    comparisonYear={comparisonYear}
-                    currentYear={currentYear}
-                  />
-                </div>
-                <div className="card-body">
-                  {isPayRise ? <p>Since {comparisonYear} you have had a real terms pay rise of {realTermsPayChange}%</p> : null}
-                  {isPayRise ? <p>This is less than the {nominalTermsPayChange}% nominal pay rise the numbers suggest</p> : null}
-                  {!isPayRise ? <p>Since {comparisonYear} you have had a real terms <span className="text-danger">pay cut</span> of {realTermsPayChange}%</p> : null}
-                  {<p>Your {comparisonYear} pay is equivalent to {formatCurrency(comparisonPayInCurrentTerms)} today</p>}
-                  <a target="_blank" rel="noreferrer" className="btn btn-primary btn-lg" href="https://twitter.com/intent/tweet?text=Know%20how%20inflation%20has%20impacted%20your%20pay%3F%0A%0AFind%20out%20at%20https%3A%2F%2Fwhatsyourwageworth.com%2C%20you%20may%20be%20surprised!" role="button">Share on Twitter</a>
-                </div>
-              </div>
-            </div>
-          </div> : null}
-      </form>
-    </div>
+          <div className="text-center">
+            {isPayRise ? <p>Since {comparisonYear} you have had a real terms pay&nbsp;rise of {realTermsPayChange}%.</p> : null}
+            {isPayRise ? <p>This is less than the {nominalTermsPayChange}% nominal pay rise you might have expected.</p> : null}
+            {!isPayRise ? <p>Since {comparisonYear} you have had a real terms <span className="text-danger">pay&nbsp;cut</span> of {realTermsPayChange}%.</p> : null}
+            {<p>Your {formatCurrency(comparisonPay)} pay in {comparisonYear} is equivalent to {formatCurrency(comparisonPayInCurrentTerms)} today.</p>}
+            {/* <a target="_blank" rel="noreferrer" className="btn btn-primary btn-lg" href="https://twitter.com/intent/tweet?text=Know%20how%20inflation%20has%20impacted%20your%20pay%3F%0A%0AFind%20out%20at%20https%3A%2F%2Fwhatsyourwageworth.com%2C%20you%20may%20be%20surprised!" role="button">Share on Twitter</a> */}
+          </div>
+        </div>
+      </div >
+    </div >
+
   );
 }
 
