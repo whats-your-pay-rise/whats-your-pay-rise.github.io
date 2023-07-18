@@ -55,7 +55,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with CRA
         run: |
-          PUBLIC_URL=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.html_url')
+          export PUBLIC_URL=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.html_url')
           ${{ steps.detect-package-manager.outputs.runner }} run build
         env:
           GH_TOKEN: ${{ github.token }}
