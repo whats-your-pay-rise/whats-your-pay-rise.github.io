@@ -46,9 +46,9 @@
     <div class="row">
       <nav class="navbar navbar-expand navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#!">What's your wage worth?</a>
+          <a class="navbar-brand" href="#">What's your wage worth?</a>
           <div class="navbar-nav">
-            <a class="nav-link text-center" href="#!">FAQs</a>
+            <a class="nav-link text-center" href="#faqs">FAQs</a>
           </div>
         </div>
       </nav>
@@ -63,7 +63,8 @@
         </header>
         </div>
         <div class="col-4 col-md-4 col-lg-3 offset-lg-1 header-image-container align-self-end">
-          <img class="header-image" src="./mobile-graph.svg" />
+          <img class="header-image d-md-none" src="./mobile-graph.svg" />
+          <img class="header-image d-none d-md-block" src="./desktop-graph.svg" />
         </div>
       </div>
     </div>
@@ -106,7 +107,7 @@
     </div>
   </section>
   <section>
-    <div class="container faqs-container">
+    <div class="container faqs-container" id="faqs">
       <div class="faqs-wrapper">
         <p class="text-center faqs-title">FAQs</p>
         <div class="accordion">

@@ -1,6 +1,6 @@
 function Graph(props) {
-    const height = 275;
-    const width = 346;
+    const height = props.height;
+    const width = props.width;
     const axisOffset = 0;
     const barPadding = 40;
     const horizontalTextPadding = -5;

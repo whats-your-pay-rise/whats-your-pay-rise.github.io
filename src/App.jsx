@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="container form-container">
       <div className="row">
-        <div className="col-12 col-lg-6 form-col">
+        <div className="col-12 col-lg-6 col-xl-5 form-col">
           <p className="">Enter your pay below to find out the full cost of inflation. Try your annual salary, your hourly
             wage, or anything in between.</p>
           <form onSubmit={onSubmit}>
@@ -58,20 +58,22 @@ function App() {
             </fieldset>
           </form>
         </div>
-        <div className={`${showResults ? "col-12" : "d-none d-lg-block"} col-lg-5 offset-lg-1`} ref={scrollRef} style={showResults ? {} : { filter: "blur(4px) grayscale(1) contrast(0.6)" }}>
-          {showResults ?
-            <Results
-              comparisonYear={comparisonYear}
-              comparisonPay={comparisonPay}
-              currentPay={currentPay}
-              data={data}
-            /> :
-            <Results
-              comparisonYear={2010}
-              comparisonPay={20000}
-              currentPay={24000}
-              data={data}
-            />}
+        <div className={`results-card ${showResults ? "" : "d-none d-md-block"} col-12 col-lg-5 offset-lg-1 col-xl-6`} ref={scrollRef}>
+          <div style={showResults ? {} : { filter: "blur(4px) grayscale(1) contrast(0.6)" }}>
+            {showResults ?
+              <Results
+                comparisonYear={comparisonYear}
+                comparisonPay={comparisonPay}
+                currentPay={currentPay}
+                data={data}
+              /> :
+              <Results
+                comparisonYear={2010}
+                comparisonPay={20000}
+                currentPay={24000}
+                data={data}
+              />}
+          </div>
         </div>
       </div >
     </div >

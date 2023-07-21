@@ -25,12 +25,21 @@ function Results(props) {
   return (
     <Fragment>
       <div className='results-graph'>
-        <Graph
-          comparisonPay={comparisonPayInCurrentTerms}
-          currentPay={props.currentPay}
-          comparisonYear={props.comparisonYear}
-          currentYear={currentYear}
-        />
+        {[
+          { className: "d-md-none", width: 346, height: 275 },
+          { className: "d-none d-md-block d-lg-none", width: 676, height: 275 },
+          { className: "d-none d-lg-block", width: 572, height: 275 },
+      ].map(graph => <div className={graph.className}>
+          <Graph
+            comparisonPay={comparisonPayInCurrentTerms}
+            currentPay={props.currentPay}
+            comparisonYear={props.comparisonYear}
+            currentYear={currentYear}
+            key={graph.className}
+            width={graph.width}
+            height={graph.height}
+          />
+        </div>)}
       </div>
       <div className="text-center">
         {isPayRise ? <p>Since {props.comparisonYear} you have had a real terms pay&nbsp;rise of {realTermsPayChange}%.</p> : null}
