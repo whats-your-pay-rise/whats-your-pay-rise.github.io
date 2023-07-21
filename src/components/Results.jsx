@@ -29,13 +29,12 @@ function Results(props) {
           { className: "d-md-none", width: 346, height: 275 },
           { className: "d-none d-md-block d-lg-none", width: 676, height: 275 },
           { className: "d-none d-lg-block", width: 572, height: 275 },
-      ].map(graph => <div className={graph.className}>
+      ].map(graph => <div className={graph.className} key={graph.className}>
           <Graph
             comparisonPay={comparisonPayInCurrentTerms}
             currentPay={props.currentPay}
             comparisonYear={props.comparisonYear}
             currentYear={currentYear}
-            key={graph.className}
             width={graph.width}
             height={graph.height}
           />

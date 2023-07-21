@@ -23,6 +23,7 @@ function Graph(props) {
                     stroke="black"
                     strokeWidth={0.5}
                     strokeOpacity={0.2}
+                    key={i}
                 />)}
             {/* <line
                 x1={axisOffset - axisStrokeWidth}
