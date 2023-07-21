@@ -12,6 +12,7 @@ function Input(props) {
       <div className="form-floating">
         <input
           type="number"
+          min="1"
           step="0.01"
           className="form-control"
           id={id}
