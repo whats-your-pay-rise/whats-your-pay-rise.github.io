@@ -18,6 +18,7 @@ function Input(props) {
           placeholder='placeholder'
           onChange={e => props.setValue(e.target.valueAsNumber)}
           onWheel={e => e.target.blur()}
+          required
         />
         <label htmlFor={id}>{props.label}</label>
       </div>

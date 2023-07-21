@@ -71,7 +71,7 @@ function App() {
                   setShowResults(false);
                 }}
               />
-              <button type="submit" className="btn btn-calculate btn-primary" disabled={!(provisionalCurrentPay && provisionalComparisonPay)}>CALCULATE</button>
+              <button type="submit" className="btn btn-calculate btn-primary">CALCULATE</button>
             </fieldset>
           </form>
         </div>

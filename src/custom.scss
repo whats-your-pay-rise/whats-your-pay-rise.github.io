@@ -328,18 +328,13 @@ footer p {
 :not(.btn-check)+.btn.btn-calculate:active {
     border-radius: 18px;
     padding: 6px 21px 6px 21px;
-    background: #C06734;
+    background: #F89055;
     border: none;
 
     @include media-breakpoint-up(md) {
       padding: 2px 23px 2px 23px;
     }
 }
-
-.btn.btn-calculate:disabled {
-    background: #F89055;
-}
-
 
 // Appearance
 
